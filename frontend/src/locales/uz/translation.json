@@ -1,0 +1,22 @@
+{
+  "admin_panel": "🚦 Admin Panel",
+  "welcome_user": "👋 Xush kelibsiz, {{email}}!",
+  "create_title": "🛠 Yaratish",
+  "create_desc": "Yangi svetafor qo‘shish orqali avtomatlashtirishni boshlang!",
+  "create_button": "➕ Yangi svetafor qo‘shish",
+  "list_title": "📋 Ro‘yxat",
+  "list_desc": "Mavjud svetaforlar ro‘yxatini ko‘rish, tahrirlash yoki o‘chirish.",
+  "list_button": "📄 Svetaforlar ro‘yxati",
+  "stats_title": "📊 Statistikalar",
+  "stats_desc": "Svetaforlar soni, foydalanuvchilar va real vaqt ma’lumotlari.",
+  "stats_button": "⏳ Statistikalar ishlanmoqda",
+  "users_title": "👤 Svetofor haqida yangiliklar",
+  "users_desc": "Barcha Kiritilgan yangliklar royhati ",
+  "logs_title": "📅 Loglar",
+  "logs_desc": "Foydalanuvchilar bajargan amallar tarixi.",
+  "ai_title": "🧠 AI Model",
+  "ai_desc": "Sun’iy intellekt holati va natijalari.",
+  "feedback_title": "📮 Fikrlar",
+  "feedback_desc": "Foydalanuvchilarning fikr-mulohazalari.",
+  "coming_soon": "Tez orada"
+}

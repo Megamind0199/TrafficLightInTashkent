@@ -1,0 +1,22 @@
+{
+  "name": "smart-traffic-lights-ai-system",
+  "version": "1.0.0",
+  "description": " this is a full-stack application that manages traffic lights using AI. It consists of a backend built with Node.js and Express, and a frontend built with React and Vite.",
+  "main": "index.js",
+  "scripts": {
+    "dev": "npm-run-all --parallel start-backend start-frontend",
+    "start-backend": "cd backend && npm run dev",
+    "start-frontend": "cd frontend && npm run dev"
+  },
+  "keywords": [],
+  "author": "Iroda Tojiboyeva",
+  "license": "ISC",
+  "type": "commonjs",
+  "dependencies": {
+    "i18next": "^25.2.1",
+    "i18next-browser-languagedetector": "^8.2.0",
+    "install": "^0.13.0",
+    "npm": "^11.4.2",
+    "react-i18next": "^15.5.3"
+  }
+}

@@ -1,0 +1,24 @@
+{
+  "admin_panel": "🚦 Admin Panel",
+  "welcome_user": "👋 Welcome, {{email}}!",
+  "create_title": "🛠 Create",
+  "create_desc": "Start automating by adding a new traffic light!",
+  "create_button": "➕ Add Traffic Light",
+  "list_title": "📋 List",
+  "list_desc": "View, edit, or delete the existing traffic lights.",
+  "list_button": "📄 Traffic Light List",
+  "stats_title": "📊 Statistics",
+  "stats_desc": "Total lights, active users, and real-time data.",
+  "stats_button": "⏳ Statistics coming soon",
+  "users_title": "👤 News about traffic light",
+  "users_desc": "List of all added news",
+  "logs_title": "📅 Logs",
+  "logs_desc": "User action history.",
+  "ai_title": "🧠 AI Model",
+  "ai_desc": "Artificial intelligence status and results.",
+  "feedback_title": "📮 Feedback",
+  "feedback_desc": "User comments and suggestions.",
+  "coming_soon": "Coming soon"
+}
+
+
