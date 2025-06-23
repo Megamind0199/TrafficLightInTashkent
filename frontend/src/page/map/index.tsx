@@ -4,6 +4,7 @@ import React, { useEffect, useRef, useState } from "react";
 import { Card, CardContent } from "@/components/ui/card";
 import { Skeleton } from "@/components/ui/skeleton";
 import { cn } from "@/lib/utils";
+import { useTranslation } from "react-i18next";
 
 declare global {
   interface Window {
@@ -24,6 +25,7 @@ const TrafficMapYandex: React.FC = () => {
   const [loading, setLoading] = useState(true);
   const [mapInstance, setMapInstance] = useState<any>(null);
   const [currentTime, setCurrentTime] = useState<number>(Date.now());
+  const { t } = useTranslation();
 
   useEffect(() => {
     const waitForYmaps = () =>
@@ -65,8 +67,10 @@ const TrafficMapYandex: React.FC = () => {
             const placemark = new ymaps.Placemark(
               [light.location.lat, light.location.lng],
               {
-                balloonContentHeader: `Svetafor`,
-                balloonContentBody: `Green: ${light.greenTime}s<br/>Red: ${light.redTime}s`,
+                balloonContentHeader: t("map.markerTitle"),
+                balloonContentBody: `${t("map.green")}: ${
+                  light.greenTime
+                }s<br/>${t("map.red")}: ${light.redTime}s`,
               },
               {
                 iconLayout: "default#image",
@@ -79,7 +83,7 @@ const TrafficMapYandex: React.FC = () => {
             instance.geoObjects.add(placemark);
           });
         } catch (err) {
-          console.error("Svetaforlarni olishda xato:", err);
+          console.error(t("map.errorGettingLights"), err);
         } finally {
           setLoading(false);
         }
@@ -88,15 +92,14 @@ const TrafficMapYandex: React.FC = () => {
 
     const interval = setInterval(() => {
       setCurrentTime(Date.now());
-    }, 1000); // har 1 sekundda UI yangilanadi
+    }, 1000);
 
     return () => {
       if (instance) instance.destroy();
       clearInterval(interval);
     };
-  }, []);
+  }, [t]);
 
-  // Auto calculate status
   const getStatus = (light: TrafficLight): "green" | "red" => {
     const total = light.greenTime + light.redTime;
     const t = Math.floor((currentTime / 1000) % total);
@@ -119,7 +122,7 @@ const TrafficMapYandex: React.FC = () => {
           <div ref={mapRef} className="w-full h-[600px]" />
           {loading && (
             <div className="absolute inset-0 bg-white/70 flex items-center justify-center font-bold text-lg">
-              Xarita yuklanmoqda...
+              {t("map.loading")}
             </div>
           )}
         </div>
@@ -127,7 +130,7 @@ const TrafficMapYandex: React.FC = () => {
         {/* List */}
         <div className="w-1/4 p-4 overflow-y-auto max-h-[600px] bg-white rounded-r-3xl border-l shadow-inner">
           <h2 className="text-2xl font-bold mb-4 text-center text-slate-700">
-            🚦 Svetaforlar
+            {t("map.title")}
           </h2>
           {loading
             ? Array.from({ length: 5 }).map((_, i) => (
@@ -143,7 +146,9 @@ const TrafficMapYandex: React.FC = () => {
                   >
                     <CardContent className="p-4 space-y-2">
                       <div className="flex justify-between items-center">
-                        <span className="text-xs text-gray-500">Status:</span>
+                        <span className="text-xs text-gray-500">
+                          {t("map.status")}:
+                        </span>
                         <span
                           className={cn(
                             "font-bold capitalize",
@@ -152,7 +157,7 @@ const TrafficMapYandex: React.FC = () => {
                               : "text-red-600"
                           )}
                         >
-                          {status}
+                          {t(`map.${status}`)}
                         </span>
                       </div>
                       <div className="flex justify-between text-sm text-gray-600">

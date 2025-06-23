@@ -18,5 +18,50 @@
   "ai_desc": "Sun’iy intellekt holati va natijalari.",
   "feedback_title": "📮 Fikrlar",
   "feedback_desc": "Foydalanuvchilarning fikr-mulohazalari.",
-  "coming_soon": "Tez orada"
+  "coming_soon": "Tez orada",
+
+  "form": {
+    "title": "🟢 Svetafor joylashuvi",
+    "mapNote": "Xaritada bitta nuqtani bosing — svetafor shu yerga qo‘shiladi",
+    "greenTime": "Yashil vaqt (sekund)",
+    "redTime": "Qizil vaqt (sekund)",
+    "submit": "Qo‘shish",
+    "errorNoLocation": "Iltimos, xaritada svetafor joylashuvini tanlang",
+    "success": "✅ Svetafor muvaffaqiyatli qo‘shildi",
+    "error": "❌ Svetafor qo‘shishda xatolik yuz berdi"
+  },
+  "validation": {
+    "min5": "Kamida 5 sekund bo‘lishi kerak"
+  },
+
+  "map": {
+    "title": "🚦 Svetaforlar",
+    "loading": "Xarita yuklanmoqda...",
+    "status": "Holati",
+    "green": "yashil",
+    "red": "qizil",
+    "markerTitle": "Svetafor",
+    "errorGettingLights": "Svetaforlarni olishda xatolik yuz berdi"
+  },
+
+  "auth": {
+    "login": "Kirish",
+    "register": "Ro‘yxatdan o‘tish",
+    "email": "Email",
+    "password": "Parol",
+    "name": "Ism",
+    "emailRequired": "Email kiritilishi kerak",
+    "passwordRequired": "Parol kiritilishi kerak",
+    "nameRequired": "Ism kiritilishi kerak",
+    "passwordMin": "Parol kamida 6 ta belgidan iborat bo‘lishi kerak",
+    "loggingIn": "Kirilmoqda...",
+    "registering": "Ro‘yxatdan o‘tyapti...",
+    "loginError": "Kirishda xatolik",
+    "registerError": "Ro‘yxatdan o‘tishda xatolik",
+    "networkError": "Tarmoqda xatolik yuz berdi",
+    "noAccount": "Akkauntingiz yo‘qmi?",
+    "registerHere": "Bu yerda ro‘yxatdan o‘ting",
+    "haveAccount": "Akkauntingiz bormi?",
+    "loginHere": "Bu yerda kiring"
+  }
 }

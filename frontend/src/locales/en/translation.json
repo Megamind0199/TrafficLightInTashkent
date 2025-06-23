@@ -18,7 +18,50 @@
   "ai_desc": "Artificial intelligence status and results.",
   "feedback_title": "📮 Feedback",
   "feedback_desc": "User comments and suggestions.",
-  "coming_soon": "Coming soon"
+  "coming_soon": "Coming soon",
+
+  "form": {
+    "title": "🟢 Traffic Light Location",
+    "mapNote": "Click a point on the map — the traffic light will be added there",
+    "greenTime": "Green Time (seconds)",
+    "redTime": "Red Time (seconds)",
+    "submit": "Add",
+    "errorNoLocation": "Please select a traffic light location on the map",
+    "success": "✅ Traffic light added successfully",
+    "error": "❌ Failed to add traffic light"
+  },
+  "validation": {
+    "min5": "Must be at least 5 seconds"
+  },
+
+  "map": {
+    "title": "🚦 Traffic Lights",
+    "loading": "Loading map...",
+    "status": "Status",
+    "green": "green",
+    "red": "red",
+    "markerTitle": "Traffic Light",
+    "errorGettingLights": "Error fetching traffic lights"
+  },
+
+  "auth": {
+    "login": "Login",
+    "register": "Register",
+    "email": "Email",
+    "password": "Password",
+    "name": "Name",
+    "emailRequired": "Email is required",
+    "passwordRequired": "Password is required",
+    "nameRequired": "Name is required",
+    "passwordMin": "Password must be at least 6 characters",
+    "loggingIn": "Logging in...",
+    "registering": "Registering...",
+    "loginError": "Login error",
+    "registerError": "Register error",
+    "networkError": "Network error",
+    "noAccount": "Don't have an account?",
+    "registerHere": "Register here",
+    "haveAccount": "Already have an account?",
+    "loginHere": "Login here"
+  }
 }
-
-

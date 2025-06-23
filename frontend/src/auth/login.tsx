@@ -1,3 +1,5 @@
+"use client";
+
 import { useForm } from "react-hook-form";
 import { useState } from "react";
 import { Input } from "@/components/ui/input";
@@ -6,6 +8,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Eye, EyeOff } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "@/context/AuthContext.tsx";
+import { useTranslation } from "react-i18next";
 
 type LoginFormInputs = {
   email: string;
@@ -19,11 +22,11 @@ type RegisterFormInputs = {
 };
 
 export default function AuthPage() {
+  const { t } = useTranslation();
   const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
   const [tab, setTab] = useState<"login" | "register">("login");
   const { login } = useAuth();
-
   const [showPassword, setShowPassword] = useState(false);
   const togglePassword = () => setShowPassword((prev) => !prev);
 
@@ -50,12 +53,12 @@ export default function AuthPage() {
 
       const result = await res.json();
       if (res.ok && result.token) {
-        login(result.token, () => navigate("/")); // ✅ Bu joy endi ishonchli ishlaydi
+        login(result.token, () => navigate("/"));
       } else {
-        alert(result.message || "Login error");
+        alert(result.message || t("auth.loginError"));
       }
     } catch {
-      alert("Network error");
+      alert(t("auth.networkError"));
     } finally {
       setLoading(false);
     }
@@ -75,10 +78,10 @@ export default function AuthPage() {
         localStorage.setItem("token", result.token);
         navigate("/");
       } else {
-        alert(result.message || "Register error");
+        alert(result.message || t("auth.registerError"));
       }
     } catch (err) {
-      alert("Network error");
+      alert(t("auth.networkError"));
     } finally {
       setLoading(false);
     }
@@ -92,19 +95,18 @@ export default function AuthPage() {
         className="w-full"
       >
         <TabsList className="grid w-full grid-cols-2">
-          <TabsTrigger value="login">Login</TabsTrigger>
-          <TabsTrigger value="register">Register</TabsTrigger>
+          <TabsTrigger value="login">{t("auth.login")}</TabsTrigger>
+          <TabsTrigger value="register">{t("auth.register")}</TabsTrigger>
         </TabsList>
 
-        {/* Login Tab */}
         <TabsContent value="login">
           <form
             onSubmit={handleLoginSubmit(onLogin)}
             className="space-y-4 mt-6"
           >
             <Input
-              placeholder="Email"
-              {...registerLogin("email", { required: "Email is required" })}
+              placeholder={t("auth.email")}
+              {...registerLogin("email", { required: t("auth.emailRequired") })}
             />
             {loginErrors.email?.message && (
               <p className="text-sm text-red-500">
@@ -115,9 +117,9 @@ export default function AuthPage() {
             <div className="relative">
               <Input
                 type={showPassword ? "text" : "password"}
-                placeholder="Password"
+                placeholder={t("auth.password")}
                 {...registerLogin("password", {
-                  required: "Password is required",
+                  required: t("auth.passwordRequired"),
                 })}
               />
               <button
@@ -135,31 +137,32 @@ export default function AuthPage() {
             )}
 
             <Button type="submit" className="w-full" disabled={loading}>
-              {loading ? "Logging in..." : "Login"}
+              {loading ? t("auth.loggingIn") : t("auth.login")}
             </Button>
 
             <p className="text-center text-sm mt-2">
-              Don't have an account?{" "}
+              {t("auth.noAccount")}{" "}
               <button
                 type="button"
                 onClick={() => setTab("register")}
                 className="text-blue-600 hover:underline"
               >
-                Register here
+                {t("auth.registerHere")}
               </button>
             </p>
           </form>
         </TabsContent>
 
-        {/* Register Tab */}
         <TabsContent value="register">
           <form
             onSubmit={handleRegisterSubmit(onRegister)}
             className="space-y-4 mt-6"
           >
             <Input
-              placeholder="Name"
-              {...registerRegister("name", { required: "Name is required" })}
+              placeholder={t("auth.name")}
+              {...registerRegister("name", {
+                required: t("auth.nameRequired"),
+              })}
             />
             {registerErrors.name?.message && (
               <p className="text-sm text-red-500">
@@ -168,8 +171,10 @@ export default function AuthPage() {
             )}
 
             <Input
-              placeholder="Email"
-              {...registerRegister("email", { required: "Email is required" })}
+              placeholder={t("auth.email")}
+              {...registerRegister("email", {
+                required: t("auth.emailRequired"),
+              })}
             />
             {registerErrors.email?.message && (
               <p className="text-sm text-red-500">
@@ -180,12 +185,12 @@ export default function AuthPage() {
             <div className="relative">
               <Input
                 type={showPassword ? "text" : "password"}
-                placeholder="Password"
+                placeholder={t("auth.password")}
                 {...registerRegister("password", {
-                  required: "Password is required",
+                  required: t("auth.passwordRequired"),
                   minLength: {
                     value: 6,
-                    message: "Password must be at least 6 characters",
+                    message: t("auth.passwordMin"),
                   },
                 })}
               />
@@ -204,17 +209,17 @@ export default function AuthPage() {
             )}
 
             <Button type="submit" className="w-full" disabled={loading}>
-              {loading ? "Registering..." : "Register"}
+              {loading ? t("auth.registering") : t("auth.register")}
             </Button>
 
             <p className="text-center text-sm mt-2">
-              Already have an account?{" "}
+              {t("auth.haveAccount")}{" "}
               <button
                 type="button"
                 onClick={() => setTab("login")}
                 className="text-blue-600 hover:underline"
               >
-                Login here
+                {t("auth.loginHere")}
               </button>
             </p>
           </form>

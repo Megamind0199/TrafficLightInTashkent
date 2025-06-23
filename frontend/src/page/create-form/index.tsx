@@ -12,10 +12,11 @@ import { MapContainer, TileLayer, Marker, useMapEvents } from "react-leaflet";
 import L from "leaflet";
 import { useState } from "react";
 import "leaflet/dist/leaflet.css";
+import { useTranslation } from "react-i18next";
 
 const formSchema = z.object({
-  greenTime: z.number().min(5, "Kamida 5 sekund bo‘lishi kerak"),
-  redTime: z.number().min(5, "Kamida 5 sekund bo‘lishi kerak"),
+  greenTime: z.number().min(5, "validation.min5"),
+  redTime: z.number().min(5, "validation.min5"),
 });
 
 type FormValues = z.infer<typeof formSchema>;
@@ -27,6 +28,8 @@ const markerIcon = new L.Icon({
 });
 
 export default function CreateTrafficLightForm() {
+  const { t } = useTranslation();
+
   const {
     register,
     handleSubmit,
@@ -47,7 +50,7 @@ export default function CreateTrafficLightForm() {
 
   const onSubmit = async (data: FormValues) => {
     if (!selectedPosition) {
-      toast.error("Iltimos, xaritada svetafor joylashuvini tanlang");
+      toast.error(t("form.errorNoLocation"));
       return;
     }
 
@@ -67,14 +70,14 @@ export default function CreateTrafficLightForm() {
         body: JSON.stringify(payload),
       });
 
-      if (!res.ok) throw new Error("Server xatosi");
+      if (!res.ok) throw new Error("Server error");
 
-      toast.success("✅ Svetafor muvaffaqiyatli qo‘shildi");
+      toast.success(t("form.success"));
       reset();
       setSelectedPosition(null);
     } catch (error) {
       console.error(error);
-      toast.error("❌ Svetafor qo‘shishda xatolik yuz berdi");
+      toast.error(t("form.error"));
     }
   };
 
@@ -91,7 +94,7 @@ export default function CreateTrafficLightForm() {
     <Card className="max-w-3xl mx-auto mt-6 p-6 shadow">
       <CardContent>
         <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
-          <h2 className="text-xl font-bold mb-4">🟢 Svetafor joylashuvi</h2>
+          <h2 className="text-xl font-bold mb-4">{t("form.title")}</h2>
 
           <MapContainer
             center={[41.3, 69.2]}
@@ -108,34 +111,36 @@ export default function CreateTrafficLightForm() {
             )}
           </MapContainer>
 
-          <p className="text-sm text-muted-foreground">
-            Xaritada bitta nuqtani bosing — svetafor shu yerga qo‘shiladi
-          </p>
+          <p className="text-sm text-muted-foreground">{t("form.mapNote")}</p>
 
           <div>
-            <Label>Green Time (sekund)</Label>
+            <Label>{t("form.greenTime")}</Label>
             <Input
               type="number"
               {...register("greenTime", { valueAsNumber: true })}
             />
             {errors.greenTime && (
-              <p className="text-red-500 text-sm">{errors.greenTime.message}</p>
+              <p className="text-red-500 text-sm">
+                {t(errors.greenTime.message || "")}
+              </p>
             )}
           </div>
 
           <div>
-            <Label>Red Time (sekund)</Label>
+            <Label>{t("form.redTime")}</Label>
             <Input
               type="number"
               {...register("redTime", { valueAsNumber: true })}
             />
             {errors.redTime && (
-              <p className="text-red-500 text-sm">{errors.redTime.message}</p>
+              <p className="text-red-500 text-sm">
+                {t(errors.redTime.message || "")}
+              </p>
             )}
           </div>
 
           <Button type="submit" className="w-full mt-4">
-            Qo‘shish
+            {t("form.submit")}
           </Button>
         </form>
       </CardContent>
